@@ -96,7 +96,7 @@ streamlit run app.py
 
 ## 📷 Demo
 
-👉 [Click here to watch the demo video](https://vimeo.com/1090858820/6239a89b13)
+👉 [Click here to watch the demo video](https://vimeo.com/1090858820?share=copy)
 
 ## 🤝 Acknowledgements
 
