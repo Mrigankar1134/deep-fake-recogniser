@@ -94,10 +94,8 @@ streamlit run app.py
 - matplotlib
 (Install via requirements.txt)
 
-## 📷 Example
+## 📷 Demo
 
-![Sample Image 1](./sample-img1.png)  
-![Sample Image 2](./sample-img2.png)
 ## 🤝 Acknowledgements
 
 Kaggle Dataset by Xhlulu
