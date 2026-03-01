@@ -5,6 +5,10 @@ from torchvision import models, transforms
 from PIL import Image
 import io
 import os
+try:
+    import gdown
+except ImportError:
+    gdown = None
 
 # Page configuration
 st.set_page_config(
@@ -454,9 +458,30 @@ def load_model(path='model_15.pth'):
         device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         model = VGG16DeepFake().to(device)
         
+        # Download model from Google Drive if not exists
         if not os.path.exists(path):
-            st.error(f"Model file '{path}' not found. Please ensure the model file is in the correct location.")
-            return None, None
+            # Google Drive file ID - Replace with your actual file ID
+            # To get file ID: Upload to Google Drive, right-click > Get link > Extract ID from URL
+            GOOGLE_DRIVE_FILE_ID = "YOUR_GOOGLE_DRIVE_FILE_ID_HERE"
+            
+            if GOOGLE_DRIVE_FILE_ID != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" and gdown:
+                try:
+                    with st.spinner("Downloading model file from Google Drive (this may take a few minutes)..."):
+                        url = f'https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}'
+                        gdown.download(url, path, quiet=False)
+                        st.success("Model downloaded successfully!")
+                except Exception as e:
+                    st.error(f"Failed to download model: {str(e)}")
+                    return None, None
+            else:
+                st.error(f"""
+                **Model file '{path}' not found.**
+                
+                Please upload the model file to Google Drive and update the GOOGLE_DRIVE_FILE_ID in app.py
+                
+                Or place the model file manually in the app directory.
+                """)
+                return None, None
         
         # Check if file is a Git LFS pointer (text file instead of binary)
         file_size = os.path.getsize(path)
@@ -467,15 +492,7 @@ def load_model(path='model_15.pth'):
                     st.error("""
                     **Model file is a Git LFS pointer, not the actual model.**
                     
-                    The actual model file (~110MB) needs to be downloaded. Options:
-                    
-                    1. **If this is a Git repository**: Run `git lfs pull` to download the actual model file.
-                    
-                    2. **Download from original source**: Get the model file from where you originally obtained this project.
-                    
-                    3. **Train your own model**: Use the `Train.ipynb` notebook to train the model yourself.
-                    
-                    The model file should be approximately 110MB in size.
+                    Please download the actual model file or update the Google Drive file ID.
                     """)
                     return None, None
             
