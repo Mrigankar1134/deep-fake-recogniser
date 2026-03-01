@@ -464,7 +464,7 @@ def load_model(path='model_15.pth'):
             # To get file ID: Upload to Google Drive, right-click > Get link > Extract ID from URL
             GOOGLE_DRIVE_FILE_ID = "1_jvUsjViG56UqhxpPjBgSIAzzvQdUYX3"
             
-            if GOOGLE_DRIVE_FILE_ID != "1_jvUsjViG56UqhxpPjBgSIAzzvQdUYX3" and gdown:
+            if GOOGLE_DRIVE_FILE_ID and GOOGLE_DRIVE_FILE_ID != "YOUR_GOOGLE_DRIVE_FILE_ID_HERE" and gdown:
                 try:
                     with st.spinner("Downloading model file from Google Drive (this may take a few minutes)..."):
                         url = f'https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}'
