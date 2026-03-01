@@ -639,7 +639,7 @@ if uploaded_file is not None:
         with col1:
             st.markdown('<div class="image-container">', unsafe_allow_html=True)
             image = Image.open(uploaded_file)
-            st.image(image, use_container_width=True)
+            st.image(image, width=None)
             if show_details:
                 with st.expander("Details"):
                     st.write(f"Format: {image.format}")
