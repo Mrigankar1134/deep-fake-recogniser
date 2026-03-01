@@ -5,6 +5,6 @@ pandas
 scikit-learn
 Pillow
 matplotlib
+altair==5.2.0
 streamlit
 gdown
-altair>=5.0.0,<6.0.0
